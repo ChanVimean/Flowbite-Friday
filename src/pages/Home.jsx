@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Home = () => {
   const items = [
@@ -22,8 +22,22 @@ const Home = () => {
     "https://static.wikia.nocookie.net/marveldatabase/images/f/fe/Avengers_Endgame_poster_041_Variant_Textless.jpg/revision/latest?cb=20190629185509",
     "https://media1.popsugar-assets.com/files/thumbor/PmWxV8uJM9lNjor5LauZg-XGPPo=/2048x1080/top/filters:format_auto():quality(85):extract_cover()/2019/07/01/076/n/46207611/tmp_YF8Suz_217bdaf4519e21ea_MCDAVEN_EC254.jpg",
     "https://i.pinimg.com/736x/10/12/1c/10121c6ec2d43d330c894e58319d5bcf.jpg",
-    "Meow.webp"
+    "Meow.webp",
   ];
+
+  const [count, setCount] = useState(0);
+  const [message, setMessage] = useState("");
+  const [data, setData] = useState([]);
+
+  // useEffect(() => {
+  //   setMessage(`You have clicked ${count} time`);
+  // }, [count]);
+
+  useEffect(() => {
+    fetch("https://clothes-json.onrender.com/products")
+      .then((res) => res.json())
+      .then((json) => setData(json));
+  }, []);
 
   return (
     <div>
@@ -69,21 +83,43 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Input Form */}
-      <section></section>
-
       {/* Display */}
       <section className="columns-2 md:columns-3 lg:columns-6 gap-4 p-4 space-y-4">
         {items.map((item, index) => (
-          <div
-            key={index}
-            className="break-inside-avoid overflow-hidden shadow rounded-lg"
-          >
-            <img
-              src={item}
-              alt="Image"
-              className="w-full h-auto"
-            />
+          <div key={index} className="overflow-hidden shadow rounded-lg">
+            <img src={item} alt="Image" className="w-full h-auto" />
+          </div>
+        ))}
+      </section>
+
+      {/* Test useEffect */}
+      {/* <section>
+        <button
+          onClick={() => setCount(count + 1)}
+          className="px-2 py-1 rounded bg-sky-400 cursor-pointer"
+        >
+          Click me
+        </button>
+        <p>{message}</p>
+      </section> */}
+      <hr />
+
+      <section className="columns-2 md:columns-3 lg:columns-6 gap-4 p-4 space-y-4">
+        {data.map((item, index) => (
+          <div key={index} className="overflow-hidden shadow rounded-lg">
+            <img src={item.image} alt="Image" />
+
+            <aside className="p-3">
+              <h1>{item.name}</h1>
+              <h3>{item.category}</h3>
+
+              <div className="flex justify-between">
+                <p>{item.size}</p>
+                <p>{item.color}</p>
+              </div>
+
+              <h2 className="mt-4">${item.price}</h2>
+            </aside>
           </div>
         ))}
       </section>

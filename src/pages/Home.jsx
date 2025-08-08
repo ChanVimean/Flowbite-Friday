@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import fetchApi from "../utils/fetchApi";
 
 const Home = () => {
   const items = [
@@ -25,18 +26,29 @@ const Home = () => {
     "Meow.webp",
   ];
 
-  const [count, setCount] = useState(0);
-  const [message, setMessage] = useState("");
-  const [data, setData] = useState([]);
+  // const [count, setCount] = useState(0);
+  // const [message, setMessage] = useState("");
+  // const [data, setData] = useState([]);
+  const [product, setProduct] = useState([]);
 
   // useEffect(() => {
   //   setMessage(`You have clicked ${count} time`);
   // }, [count]);
 
+  // useEffect(() => {
+  //   fetch("https://clothes-json.onrender.com/products")
+  //     .then((res) => res.json())
+  //     .then((json) => setData(json));
+  // }, []);
+
   useEffect(() => {
-    fetch("https://clothes-json.onrender.com/products")
-      .then((res) => res.json())
-      .then((json) => setData(json));
+    const loadData = async () => {
+      const productData = await fetchApi();
+      if (!productData) return;
+      setProduct(productData);
+    };
+
+    loadData();
   }, []);
 
   return (
@@ -104,9 +116,39 @@ const Home = () => {
       </section> */}
       <hr />
 
-      <section className="columns-2 md:columns-3 lg:columns-6 gap-4 p-4 space-y-4">
+      {/* Fetch */}
+      {/* <section className="columns-2 md:columns-3 lg:columns-6 gap-4 p-4 space-y-4">
         {data.map((item, index) => (
-          <div key={index} className="overflow-hidden shadow rounded-lg">
+          <div
+            key={index}
+            className="overflow-hidden shadow rounded-lg bg-blue-200"
+          >
+            <img src={item.image} alt="Image" />
+
+            <aside className="p-3">
+              <h1>{item.name}</h1>
+              <h3>{item.category}</h3>
+
+              <div className="flex justify-between">
+                <p>{item.size}</p>
+                <p>{item.color}</p>
+              </div>
+
+              <h2 className="mt-4">${item.price}</h2>
+            </aside>
+          </div>
+        ))}
+      </section> */}
+
+      <hr />
+
+      {/* Axios */}
+      <section className="columns-2 md:columns-3 lg:columns-6 gap-4 p-4 space-y-4">
+        {product.map((item, index) => (
+          <div
+            key={index}
+            className="overflow-hidden shadow rounded-lg bg-blue-200"
+          >
             <img src={item.image} alt="Image" />
 
             <aside className="p-3">

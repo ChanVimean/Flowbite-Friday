@@ -7,7 +7,7 @@ const NavBar = () => {
   const { theme, toggleTheme } = useContext(ProductContext);
 
   return (
-    <nav className="border-gray-200">
+    <nav>
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           <img
@@ -25,7 +25,9 @@ const NavBar = () => {
           <li>News</li>
           <li>Profile</li>
           <li>
-            <button onClick={toggleTheme}>{theme === "light " ? <MdDarkMode /> : <IoSunny />}</button>
+            <button onClick={toggleTheme}>
+              {theme === "light " ? <MdDarkMode /> : <IoSunny />}
+            </button>
           </li>
         </ul>
       </div>

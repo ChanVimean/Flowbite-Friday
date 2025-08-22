@@ -2,6 +2,7 @@ import { useContext } from "react";
 import ProductContext from "../context/ProductContext";
 import { MdDarkMode } from "react-icons/md";
 import { IoSunny } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const { theme, toggleTheme } = useContext(ProductContext);
@@ -20,10 +21,9 @@ const NavBar = () => {
           </span>
         </a>
         <ul className="flex space-x-8">
-          <li>Home</li>
-          <li>About</li>
-          <li>News</li>
-          <li>Profile</li>
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/anchor">Anchor</Link>
           <li>
             <button onClick={toggleTheme}>
               {theme === "light " ? <MdDarkMode /> : <IoSunny />}

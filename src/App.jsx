@@ -7,6 +7,7 @@ import Test from "./pages/Test";
 import Test2 from "./pages/Test2";
 import About from "./pages/About";
 import Anchor from "./pages/Anchor";
+import Product from "./pages/Product";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/anchor" element={<Anchor />} />
+          <Route path="/product" element={<Product />} />
         </Routes>
       </main>
 

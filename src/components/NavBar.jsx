@@ -24,6 +24,7 @@ const NavBar = () => {
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
           <Link to="/anchor">Anchor</Link>
+          <Link to="/product">Product</Link>
           <li>
             <button onClick={toggleTheme}>
               {theme === "light " ? <MdDarkMode /> : <IoSunny />}
